@@ -7,8 +7,15 @@ namespace BusBoard
 {
     public class TflApiHandler
     {
-        private static string _url = @"https://api.tfl.gov.uk";
-        private readonly IRestClient _client = new RestClient(_url);
+        private string _url
+        {
+            get => @"https://api.tfl.gov.uk";
+        }
+
+        private IRestClient _client
+        {
+            get => new RestClient(_url);
+        }
 
 
         public List<IncomingBusPrediction> GetIncomingBusPredictions(string stopId)
@@ -22,6 +29,17 @@ namespace BusBoard
 
         public List<BusStop> GetNearbyBusStops(Coordinate coordinate, int searchRadiusInMeters = 200)
         {
+            if (coordinate == null)
+            {
+                return null;
+            }
+            
+            if (searchRadiusInMeters <= 0)
+            {
+                Console.WriteLine("Invalid search radius! Must be a positive integer");
+                return null;
+            }
+
             var request =
                 new RestRequest(
                     $"StopPoint?stopTypes=NaptanPublicBusCoachTram&modes=bus" +
@@ -33,21 +51,10 @@ namespace BusBoard
             if (response.Data.Count == 0)
             {
                 Console.WriteLine("Cannot find any bus stops around the area. Try increasing search radius");
+                return null;
             }
 
-            if (searchRadiusInMeters <= 0)
-            {
-                Console.WriteLine("Invalid search radius! Must be a positive integer");
-            }
-
-            if (response.IsSuccessful)
-            {
-                return response.Data.OrderBy(t => t.Distance).Take(2).ToList();
-            }
-            else
-            {
-                return new List<BusStop>();
-            }
+            return response.Data.OrderBy(t => t.Distance).Take(2).ToList();
         }
     }
 }

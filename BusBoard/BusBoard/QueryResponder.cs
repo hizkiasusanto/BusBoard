@@ -8,7 +8,8 @@ namespace BusBoard
     {
         public static void PrintNearbyBusStopsArrivals(List<BusStop> nearbyBusStops)
         {
-            if (nearbyBusStops.Count > 0){
+            if (nearbyBusStops != null)
+            {
                 foreach (var busStop in nearbyBusStops)
                 {
                     Console.WriteLine();
@@ -18,6 +19,7 @@ namespace BusBoard
                 }
             }
         }
+
         public static void PrintBusArrivalSchedule(List<IncomingBusPrediction> incomingBusPredictions)
         {
             Console.WriteLine("----------------------------------------------------------------");

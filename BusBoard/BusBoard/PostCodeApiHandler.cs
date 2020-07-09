@@ -5,8 +5,15 @@ namespace BusBoard
 {
     public class PostCodeApiHandler
     {
-        private static string _url = "https://api.postcodes.io/postcodes";
-        private readonly IRestClient _client = new RestClient(_url);
+        private string _url
+        {
+            get => "https://api.postcodes.io/postcodes";
+        }
+
+        private IRestClient _client
+        {
+            get => new RestClient(_url);
+        }
         
         public Coordinate GetCoordinate(string postCode)
         {
@@ -17,6 +24,7 @@ namespace BusBoard
             if (!response.IsSuccessful)
             {
                 Console.WriteLine("Invalid postal code");
+                return null;
             }
             
             return response.Data;
