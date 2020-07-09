@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RestSharp;
 
-namespace BusBoard
+namespace BusBoard.ConsoleApp
 {
     public class TflApiHandler
     {

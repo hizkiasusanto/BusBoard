@@ -1,7 +1,7 @@
 ﻿using System;
 using RestSharp;
 
-namespace BusBoard
+namespace BusBoard.ConsoleApp
 {
     public class PostCodeApiHandler
     {

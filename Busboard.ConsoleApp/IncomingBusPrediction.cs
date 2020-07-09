@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BusBoard
+namespace BusBoard.ConsoleApp
 {
     public class IncomingBusPrediction
     {

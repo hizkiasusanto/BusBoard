@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BusBoard
+namespace BusBoard.ConsoleApp
 {
     public class QueryResponder
     {
