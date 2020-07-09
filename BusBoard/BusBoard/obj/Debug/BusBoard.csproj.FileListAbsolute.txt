@@ -9,3 +9,5 @@ D:\Workspace\SoftwireWork\Busboard\BusBoard\BusBoard\obj\Debug\BusBoard.exe
 D:\Workspace\SoftwireWork\Busboard\BusBoard\BusBoard\obj\Debug\BusBoard.pdb
 D:\Workspace\SoftwireWork\Busboard\BusBoard\BusBoard\bin\Debug\Newtonsoft.Json.dll
 D:\Workspace\SoftwireWork\Busboard\BusBoard\BusBoard\bin\Debug\Newtonsoft.Json.xml
+D:\Workspace\SoftwireWork\Busboard\BusBoard\BusBoard\bin\Debug\NLog.dll
+D:\Workspace\SoftwireWork\Busboard\BusBoard\BusBoard\bin\Debug\NLog.xml
