@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Net;
 using RestSharp;
 
-namespace BusBoard.ConsoleApp
+namespace BusBoard.Api
 {
     public class PostCodeApiHandler
     {
@@ -21,7 +22,7 @@ namespace BusBoard.ConsoleApp
             request.RootElement = "result";
             var response = _client.Execute<Coordinate>(request);
 
-            if (!response.IsSuccessful)
+            if (response.StatusCode != HttpStatusCode.OK)
             {
                 Console.WriteLine("Invalid postal code");
                 return null;

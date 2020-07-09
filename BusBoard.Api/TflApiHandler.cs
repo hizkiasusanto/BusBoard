@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using RestSharp;
 
-namespace BusBoard.ConsoleApp
+namespace BusBoard.Api
 {
     public class TflApiHandler
     {
         private string _url
         {
-            get => @"https://api.tfl.gov.uk";
+            get => "https://api.tfl.gov.uk";
         }
 
         private IRestClient _client

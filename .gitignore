@@ -1,34 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@hizkiaadrian 
-hizkiaadrian
-/
-BusBoard-1
-forked from CorndelWithSoftwire/BusBoard
-0
-055
-Code
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-BusBoard-1/.gitignore
-@MatthewRichards
-MatthewRichards Empty solution
-Latest commit 372f810 on Feb 17, 2017
- History
- 1 contributor
-281 lines (227 sloc)  4.69 KB
-  
 
 # Created by https://www.gitignore.io/api/visualstudio
 
@@ -310,15 +279,3 @@ __pycache__/
 # !tools/packages.config
 
 # End of https://www.gitignore.io/api/visualstudio
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
