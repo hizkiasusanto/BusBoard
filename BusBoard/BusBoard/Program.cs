@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using RestSharp;
-using Newtonsoft.Json.Linq;
 
 namespace BusBoard
 {
@@ -23,14 +22,11 @@ namespace BusBoard
                 var incomingBusPredictions =
                     JsonConvert.DeserializeObject<List<IncomingBusPrediction>>(new RestClient(tflApiUrl).Get(request)
                         .Content);
+                
+                incomingBusPredictions = incomingBusPredictions
+                    .OrderBy(t => t.TimeToArrival).ToList();
 
-                Console.WriteLine("----------------------------------------------------------------");
-                Console.WriteLine("|{0,-10}|{1,-25}|{2,-25}|", "Bus Number", "Final Stop", "Time to Arrival (seconds)");
-                Console.WriteLine("----------------------------------------------------------------");
-                foreach (var incomingBusPrediction in incomingBusPredictions.Take(5))
-                {
-                    incomingBusPrediction.Print();
-                }
+                QueryResponder.PrintBusArrivalSchedule(incomingBusPredictions);
             }
         }
     }
