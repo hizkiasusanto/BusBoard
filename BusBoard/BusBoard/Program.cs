@@ -20,7 +20,7 @@ namespace BusBoard
                 incomingBusPredictions = incomingBusPredictions
                     .OrderBy(t => t.TimeToStation).ToList();
 
-                //QueryResponder.PrintBusArrivalSchedule(incomingBusPredictions);
+                QueryResponder.PrintBusArrivalSchedule(incomingBusPredictions);
             }
         }
     }
