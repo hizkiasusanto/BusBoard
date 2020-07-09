@@ -6,7 +6,7 @@ namespace BusBoard
     public class PostCodeApiHandler
     {
         private static string _url = "https://api.postcodes.io/postcodes";
-        private IRestClient _client = new RestClient(_url);
+        private readonly IRestClient _client = new RestClient(_url);
         
         public Coordinate GetCoordinate(string postCode)
         {

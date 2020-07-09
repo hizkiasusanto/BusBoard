@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace BusBoard
+﻿namespace BusBoard
 {
     public class Coordinate
     {

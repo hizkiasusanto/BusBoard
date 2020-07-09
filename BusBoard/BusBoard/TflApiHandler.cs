@@ -8,14 +8,15 @@ namespace BusBoard
     public class TflApiHandler
     {
         private static string _url = @"https://api.tfl.gov.uk";
-        private IRestClient _client = new RestClient(_url);
+        private readonly IRestClient _client = new RestClient(_url);
 
 
         public List<IncomingBusPrediction> GetIncomingBusPredictions(string stopId)
         {
             var request = new RestRequest($"StopPoint/{stopId}/Arrivals");
 
-            return _client.Execute<List<IncomingBusPrediction>>(request).Data.OrderBy(t => t.TimeToStation).Take(5).ToList();
+            return _client.Execute<List<IncomingBusPrediction>>(request)
+                .Data.OrderBy(t => t.TimeToStation).Take(5).ToList();
             ;
         }
 
