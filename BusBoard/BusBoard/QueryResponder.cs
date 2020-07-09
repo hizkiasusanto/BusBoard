@@ -6,6 +6,20 @@ namespace BusBoard
 {
     public class QueryResponder
     {
+        public static void PrintNearbyBusStopsArrivals(List<BusStop> nearbyBusStops)
+        {
+            if (nearbyBusStops != null)
+            {
+                foreach (var busStop in nearbyBusStops)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Bus Stop Name: {busStop.CommonName}");
+                    Console.WriteLine($"Bus Stop ID: {busStop.Id}");
+                    PrintBusArrivalSchedule(new TflApiHandler().GetIncomingBusPredictions(busStop.Id));
+                }
+            }
+        }
+
         public static void PrintBusArrivalSchedule(List<IncomingBusPrediction> incomingBusPredictions)
         {
             Console.WriteLine("----------------------------------------------------------------");
