@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using RestSharp;
 
 namespace BusBoard
@@ -12,19 +14,17 @@ namespace BusBoard
             {
                 Console.Write("\nEnter a postal code: ");
                 var postCode = Console.ReadLine();
-                
-                var postCodeCoordinate = new PostCodeApi().GetCoordinate(postCode);
+                Console.Write("Enter search radius in meters (default=200): ");
+                int searchRadius  = int.Parse(Console.ReadLine());
 
-                var nearbyBusStops = new TflApi().GetNearbyBusStops(postCodeCoordinate);
+                var postCodeCoordinate = new PostCodeApiHandler().GetCoordinate(postCode);
 
-                foreach (var busStop in nearbyBusStops)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine($"Bus Stop Name: {busStop.CommonName}");
-                    Console.WriteLine($"Bus Stop ID: {busStop.Id}");
-                    QueryResponder.PrintBusArrivalSchedule(busStop.GetIncomingBusPredictions());
-                }
+                var nearbyBusStops = new TflApiHandler().GetNearbyBusStops(postCodeCoordinate, searchRadius);
+
+                QueryResponder.PrintNearbyBusStopsArrivals(nearbyBusStops);
             }
         }
+
+        
     }
 }
