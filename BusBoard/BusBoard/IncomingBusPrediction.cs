@@ -5,9 +5,9 @@ namespace BusBoard
 {
     public class IncomingBusPrediction
     {
-        [JsonProperty("lineName")] public string LineName { get; set; }
-        [JsonProperty("destinationName")] public string DestinationName { get; set; }
-        [JsonProperty("timeToStation")] public int TimeToStation { get; set; }
+        public string LineName { get; set; }
+        public string DestinationName { get; set; }
+        public int TimeToStation { get; set; }
 
         public void Print()
         {

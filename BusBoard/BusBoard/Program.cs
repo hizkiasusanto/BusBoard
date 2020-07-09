@@ -6,21 +6,24 @@ namespace BusBoard
 {
     internal class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
             while (true)
             {
-                Console.Write("Enter a postal code: ");
+                Console.Write("\nEnter a postal code: ");
                 var postCode = Console.ReadLine();
                 
                 var postCodeCoordinate = new PostCodeApi().GetCoordinate(postCode);
 
-                var incomingBusPredictions = new TflApi().GetIncomingBusPredictions("490008660N");
+                var nearbyBusStops = new TflApi().GetNearbyBusStops(postCodeCoordinate);
 
-                incomingBusPredictions = incomingBusPredictions
-                    .OrderBy(t => t.TimeToStation).ToList();
-
-                QueryResponder.PrintBusArrivalSchedule(incomingBusPredictions);
+                foreach (var busStop in nearbyBusStops)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Bus Stop Name: {busStop.CommonName}");
+                    Console.WriteLine($"Bus Stop ID: {busStop.Id}");
+                    QueryResponder.PrintBusArrivalSchedule(busStop.GetIncomingBusPredictions());
+                }
             }
         }
     }
