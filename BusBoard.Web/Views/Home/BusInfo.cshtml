@@ -1,10 +1,50 @@
-﻿@model BusBoard.Web.ViewModels.BusInfo
+﻿@using System.Net.Configuration
+@model BusBoard.Web.ViewModels.BusInfo
 @{
-  ViewBag.Title = "Bus Information";
+    ViewBag.Title = "Bus Information";
 }
 
 <h2>BusInfo</h2>
 
 <div class="row">
-    <p>You entered postcode @Model.PostCode</p>
+    <p>You entered postcode <strong>@Model.PostCode</strong> </p>
+    @if (@Model.Coordinate == null)
+    {
+        <p>Invalid post code!</p>
+    }
+
+    else
+    {
+        <p>(@Model.Coordinate.Latitude, @Model.Coordinate.Longitude)</p>
+        if (@Model.NearbyBusStops == null)
+        {
+            <p>Cannot find bus stops nearby. Make sure the post code is in London area or 
+                try increasing the search radius</p>
+        }
+        else
+        {
+            foreach (var @stopWithArrivals in @Model.StopWithArrivals)
+            {
+                <h3>Bus Stop Name: @stopWithArrivals.BusStop.CommonName</h3>
+                <h4>ID: @stopWithArrivals.BusStop.Id</h4>
+                <table>
+                    <tr>
+                        <th>Bus Number</th>
+                        <th>Towards</th>
+                        <th>Arriving in</th>
+                    </tr>
+                    @foreach (var @busPrediction in @stopWithArrivals.IncomingBusPredictions)
+                    {
+                        <tr>
+                            <td>@busPrediction.LineName</td>
+                            <td>@busPrediction.DestinationName</td>
+                            <td>@(busPrediction.TimeToStation / 60) mins</td>
+                        </tr>
+                    }
+                </table>
+            }
+            <br/><br/>
+            <p><i>This page refreshes every 30 seconds.</i></p>
+        }
+    }
 </div>
