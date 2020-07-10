@@ -1,4 +1,5 @@
-﻿@model BusBoard.Web.ViewModels.BusInfo
+﻿@using System.Net.Configuration
+@model BusBoard.Web.ViewModels.BusInfo
 @{
   ViewBag.Title = "Bus Information";
 }
@@ -7,4 +8,30 @@
 
 <div class="row">
     <p>You entered postcode @Model.PostCode</p>
+    @if (@Model.Coordinate == null)
+    {
+        <p>Invalid post code!</p>
+    }
+    else {
+        <p>Coordinate: @Model.Coordinate.Latitude, @Model.Coordinate.Longitude</p>
+    }
+    
+    @if (@Model.NearbyBusStops == null)
+    {
+        <p>Cannot find bus stops nearby</p>
+    }
+     else
+     {
+         foreach (var @stopWithArrivals in @Model.StopWithArrivals)
+         {
+             <h2>Bus Stop Name: @stopWithArrivals.BusStop.CommonName</h2>
+             <br>
+             <h4>ID: @stopWithArrivals.BusStop.Id</h4>
+             <br>
+             foreach (var @busPrediction in @stopWithArrivals.IncomingBusPredictions)
+             {
+                 <p>@busPrediction.LineName, @busPrediction.DestinationName, @busPrediction.TimeToStation</p><br/>
+             }
+         }
+     }
 </div>

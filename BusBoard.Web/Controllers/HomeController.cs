@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using BusBoard.Api;
 using BusBoard.Web.Models;
 using BusBoard.Web.ViewModels;
 
@@ -17,7 +18,14 @@ namespace BusBoard.Web.Controllers
       // Add some properties to the BusInfo view model with the data you want to render on the page.
       // Write code here to populate the view model with info from the APIs.
       // Then modify the view (in Views/Home/BusInfo.cshtml) to render upcoming buses.
-      var info = new BusInfo(selection.Postcode);
+      var info = new BusInfo(selection.Postcode, selection.SearchRadius);
+      info.Coordinate = new PostCodeApiHandler().GetCoordinate(selection.Postcode);
+      info.NearbyBusStops = new TflApiHandler().GetNearbyBusStops(info.Coordinate,selection.SearchRadius);
+
+      foreach (var nearbyBusStop in info.NearbyBusStops)
+      {
+        info.StopWithArrivals.Add(new StopWithArrivals(nearbyBusStop));
+      }
       return View(info);
     }
 

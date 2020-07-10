@@ -49,6 +49,7 @@
     <Compile Include="PostCodeApiHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IncomingBusPrediction.cs" />
+    <Compile Include="StopWithArrivals.cs" />
     <Compile Include="TflApiHandler.cs" />
   </ItemGroup>
   <ItemGroup>
