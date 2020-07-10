@@ -5,8 +5,10 @@
 
 <div class="jumbotron">
     <h1>BusBoard</h1>
-    <p class="lead">For all your bus info needs. Enter a postcode below, as well as the search radius and click enter 
-        to see bus times for that location.</p>
+    <p class="lead">
+        For all your bus info needs. Enter a postcode below, as well as the search radius and click enter
+        to see bus times for that location.
+    </p>
 </div>
 
 <div class="row">
@@ -15,9 +17,17 @@
         {
             <fieldset>
                 <label>Post Code:</label>
-                @Html.TextBoxFor(m => m.Postcode)<br>
+                @Html.TextBoxFor(m => m.Postcode,
+                    new {
+                        type = "text",
+                        pattern = "^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]" +
+                                  "{1,2})|(([AZa-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))[0-9][A-Za-z]{2})$",
+                        oninvalid = "alert('Invalid UK postal code');"})
+                <br>
                 <label>Search radius (m):</label>
-                @Html.TextBoxFor(m => m.SearchRadius, new {@Value = "200"})<br>
+                @Html.TextBoxFor(m => m.SearchRadius,
+                    new {type = "number", min = 1, Value = 200})
+                <br>
 
                 <input type="submit" value="Get Bus Info"/>
             </fieldset>
